@@ -1,8 +1,5 @@
 #include "quantum.h"
 
-
-//#define _______ KC_TRNS
-
 #define ___1___ KC_1
 #define ___2___ KC_2
 #define ___3___ KC_3
@@ -86,10 +83,20 @@ enum custom_keycodes {
 
 enum userspace_layers {
   BASE = 0,
+  OSX,
   FN1,
   FN2,
   GAM,
   CAP,
+};
+
+enum underglow_layers {
+  UGL_NONE = 0,
+  UGL_OSX,
+  UGL_GAME,
+  UGL_CAPS,
+  UGL_UC_LINUX,
+  UGL_UC_OSX
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record);
