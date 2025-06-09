@@ -24,8 +24,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, SHRUG,   POOP,    FLIPTAB, FLIPTA2, THUMBUP, _______, _______, _______, _______, _______,  _______, _______,  _______,     _______, _______, _______,
         _______,  KC_MUTE, KC_VOLU, RGBSWRL, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______,  QK_BOOT,     _______, KC_MUTE, _______,
         _______,   KC_MPRV, KC_VOLD, KC_MNXT, RGBSTAT, RGBBREA, _______, _______, _______, _______, _______, _______,          _______,
-        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, KC_WH_U, KC_WH_D, _______,                  KC_MPLY,              KC_VOLU,
-        _______,    TG(CAP),    _______,                      TG(GAM),                      _______,    __F13__,    _______,   RGB_TOG,     KC_MPRV, KC_VOLD, KC_MNXT),
+        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, KC_WH_U, KC_WH_D, UC_NEXT,                  KC_MPLY,              KC_VOLU,
+        TG(OSX),    TG(CAP),    _______,                      TG(GAM),                      _______,    __F13__,    _______,   RGB_TOG,     KC_MPRV, KC_VOLD, KC_MNXT),
 
     [CAP] = LAYOUT_ansi_standard(
         _______, _______, _______, _______, _______,  _______, _______, _______, _______,  _______, _______, _______, _______, _______,     _______, _______, _______,

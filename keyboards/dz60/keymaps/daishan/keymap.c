@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, SHRUG,   POOP,    FLIPTAB, FLIPTA2, THUMBUP, _______, _______, _______, _______, _______, UC_LINX, UC_MAC,    _______,
         _______,  KC_MUTE, KC_VOLU, RGBSWRL, UG_NEXT, UG_HUEU, UG_HUED, UG_SATU, UG_SATD, UG_VALU, UG_VALD, UG_SPDU, UG_SPDD,  QK_BOOT,
         _______,   KC_WBAK, KC_VOLD, KC_WFWD, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, KC_WH_U, KC_WH_D, UC_NEXT,                  KC_MPLY,
+        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, MS_WHLU, MS_WHLD, UC_NEXT,                  KC_MPLY,
         TG(OSX),    TG(CAP),    _______,                      TG(GAM),                      _______,    __F13__,    _______,   UG_TOGG),
 
     [CAP] = LAYOUT_60_ansi(

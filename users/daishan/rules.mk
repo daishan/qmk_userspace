@@ -1,1 +1,8 @@
 SRC += daishan.c
+
+BOOTMAGIC_ENABLE = yes
+MOUSEKEY_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+
+UNICODE_COMMON = yes
+UNICODE_ENABLE = yes

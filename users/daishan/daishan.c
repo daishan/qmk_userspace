@@ -1,5 +1,14 @@
 #include "daishan.h"
 
+typedef union {
+  uint32_t raw;
+  struct {
+    bool osx_layer_enabled :1;
+  };
+} user_config_t;
+
+user_config_t user_config;
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch(keycode) {
@@ -28,6 +37,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 };
+
+#ifdef RGBLIGHT_LAYERS
 
 const rgblight_segment_t PROGMEM daishan_layer_white[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 16, HSV_WHITE}
@@ -70,19 +81,40 @@ const rgblight_segment_t* const PROGMEM daishan_rgb_layers[] = RGBLIGHT_LAYERS_L
     daishan_layer_uc_osx
 );
 
+#endif // RGBLIGHT_LAYERS
+
 void keyboard_post_init_user(void) {
+    // initialize underglow layers
+    #ifdef RGBLIGHT_LAYERS
     rgblight_layers = daishan_rgb_layers;
+    #endif
+
+    // Read the user config from EEPROM and turn on OSX layer, if enabled
+    user_config.raw = eeconfig_read_user();
+    if (user_config.osx_layer_enabled) {
+        layer_on(OSX);
+    }
 }
 
 layer_state_t prev_state = 0;
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    // blink in respective color if turning OSX layer on or off
+    // blink in respective color if turning OSX layer on or off and remember state in eeprom
     if (!layer_state_cmp(prev_state, OSX) && layer_state_cmp(state, OSX)) {
+        #ifdef RGBLIGHT_LAYERS
         rgblight_blink_layer(UGL_OSX, 1000);
+        #endif
+        user_config.osx_layer_enabled = 1;
+        eeconfig_update_user(user_config.raw);
     } else if (layer_state_cmp(prev_state, OSX) && !layer_state_cmp(state, OSX)){
+        #ifdef RGBLIGHT_LAYERS
         rgblight_blink_layer(UGL_NONE, 1000);
+        #endif
+        user_config.osx_layer_enabled = 0;
+        eeconfig_update_user(user_config.raw);
     }
+
+    #ifdef RGBLIGHT_LAYERS
     // blink in respective color if turning gaming layer on or off
     if (!layer_state_cmp(prev_state, GAM) && layer_state_cmp(state, GAM)) {
         rgblight_blink_layer(UGL_GAME, 1000);
@@ -91,11 +123,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
     // permanently notify if caps lock layer is on
     rgblight_set_layer_state(UGL_CAPS, layer_state_cmp(state, CAP));
+    #endif
 
     prev_state = state;
     return state;
 }
 
+#ifdef RGBLIGHT_LAYERS
 void unicode_input_mode_set_user(uint8_t input_mode) {
     if (input_mode == UNICODE_MODE_LINUX) {
         rgblight_blink_layer(UGL_UC_LINUX, 1000);
@@ -105,3 +139,4 @@ void unicode_input_mode_set_user(uint8_t input_mode) {
         rgblight_blink_layer(UGL_NONE, 1000);
     }
 }
+#endif

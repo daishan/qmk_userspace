@@ -26,6 +26,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,    ___Z___, ___X___, ___C___, ___V___, ___B___, ___N___, ___M___, KC_COMM, KC_DOT,  KC_SLSH,       KC_RSFT,   MO(FN1),
         KC_LCTL,    KC_LGUI,    KC_LALT,           KC_SPC,   MO(FN1),  KC_SPC,              KC_RALT,    MO(FN1),    MO(FN2),   KC_RCTL),
 
+    [OSX] = LAYOUT_60_ansi(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______,
+        _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,
+        _______,   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______,    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,                  _______,
+        KC_LGUI,    KC_LCTL,    _______,                      _______,                      _______,    _______,    _______,   _______),
 
     [FN1] = LAYOUT_daishan(
         KC_GRV,  __F1___, __F2___, __F3___, __F4___, __F5___, __F6___, __F7___, __F8___, __F9___, __F10__, __F11__, __F12__,   KC_DEL,
@@ -37,10 +43,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [FN2] = LAYOUT_daishan(
         _______, SHRUG,   POOP,    FLIPTAB, FLIPTA2, THUMBUP, _______, _______, _______, _______, _______,  _______,  _______, _______,
-        _______,  KC_MUTE, KC_VOLU, RGBSWRL, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______,  QK_BOOT,
+        _______,  KC_MUTE, KC_VOLU, RGBSWRL, UG_NEXT, UG_HUEU, UG_HUED, UG_SATU, UG_SATD, UG_VALU, UG_VALD, UG_SPDU, UG_SPDD,  QK_BOOT,
         _______,   KC_MPRV, KC_VOLD, KC_MNXT, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, _______, _______, _______,       KC_MPLY,   _______,
-        _______,    TG(CAP),    _______,           _______,  TG(GAM),  _______,             _______,    __F13__,    _______,   RGB_TOG),
+        _______,    _______, BL_DOWN, BL_TOGG, BL_UP,   BL_STEP, _______, _______, MS_WHLU, MS_WHLD, UC_NEXT,       KC_MPLY,   _______,
+        TG(OSX),    TG(CAP),    _______,           _______,  TG(GAM),  _______,             _______,    __F13__,    _______,   UG_TOGG),
 
 
     [CAP] = LAYOUT_daishan(
