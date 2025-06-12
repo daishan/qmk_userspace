@@ -69,6 +69,13 @@
 #define DESK_03 LCTL(KC_F3)
 #define DESK_04 LCTL(KC_F4)
 
+#define APP_001 LCTL(LALT(LGUI(KC_F1)))
+#define APP_002 LCTL(LALT(LGUI(KC_F2)))
+#define APP_003 LCTL(LALT(LGUI(KC_F3)))
+#define APP_004 LCTL(LALT(LGUI(KC_F4)))
+#define APP_005 LCTL(LALT(LGUI(KC_F5)))
+#define APP_006 LCTL(LALT(LGUI(KC_F6)))
+
 #define WINLEFT LGUI(KC_LEFT)
 #define WINRGHT LGUI(KC_RGHT)
 
@@ -85,6 +92,7 @@ enum userspace_layers {
   BASE = 0,
   OSX,
   FN1,
+  FNO, // FN1 for OSX, turns on FN1 too
   FN2,
   GAM,
   CAP,

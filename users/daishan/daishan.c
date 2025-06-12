@@ -35,6 +35,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             #endif
         }
     }
+    // if turning on FNO layer, also turn on FN1 layer
+    if (keycode == MO(FNO)) {
+        if (record->event.pressed) {
+            layer_on(FN1);
+            layer_on(FNO);
+        } else {
+            layer_off(FNO);
+            layer_off(FN1);
+        }
+        return false;
+    }
     return true;
 };
 
@@ -57,19 +68,32 @@ const rgblight_segment_t PROGMEM daishan_layer_caps[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM daishan_layer_uc_linux[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_RED}, {2, 2, HSV_GREEN},
-    {4, 2, HSV_RED}, {6, 2, HSV_GREEN},
-    {8, 2, HSV_RED}, {10, 2, HSV_GREEN},
-    {12, 2, HSV_RED}, {14, 2, HSV_GREEN}
+    { 0, 2, HSV_RED}, { 2, 2, HSV_GREEN},
+    { 4, 2, HSV_RED}, { 6, 2, HSV_GREEN},
+    { 8, 2, HSV_RED}, {10, 2, HSV_GREEN},
+    {12, 2, HSV_RED}, {14, 2, HSV_GREEN},
+    {14, 2, HSV_RED}, {16, 2, HSV_GREEN},
+    {18, 2, HSV_RED}, {20, 2, HSV_GREEN},
+    {22, 2, HSV_RED}, {24, 2, HSV_GREEN},
+    {26, 2, HSV_RED}, {28, 2, HSV_GREEN},
+    {30, 2, HSV_RED}, {32, 2, HSV_GREEN},
+    {34, 2, HSV_RED}, {36, 2, HSV_GREEN},
+    {38, 2, HSV_RED}, {40, 2, HSV_GREEN}
 );
 
 const rgblight_segment_t PROGMEM daishan_layer_uc_osx[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 2, HSV_RED}, {2, 2, HSV_BLUE},
-    {4, 2, HSV_RED}, {6, 2, HSV_BLUE},
-    {8, 2, HSV_RED}, {10, 2, HSV_BLUE},
-    {12, 2, HSV_RED}, {14, 2, HSV_BLUE}
+    { 0, 2, HSV_RED}, { 2, 2, HSV_BLUE},
+    { 4, 2, HSV_RED}, { 6, 2, HSV_BLUE},
+    { 8, 2, HSV_RED}, {10, 2, HSV_BLUE},
+    {12, 2, HSV_RED}, {14, 2, HSV_BLUE},
+    {14, 2, HSV_RED}, {16, 2, HSV_BLUE},
+    {18, 2, HSV_RED}, {20, 2, HSV_BLUE},
+    {22, 2, HSV_RED}, {24, 2, HSV_BLUE},
+    {26, 2, HSV_RED}, {28, 2, HSV_BLUE},
+    {30, 2, HSV_RED}, {32, 2, HSV_BLUE},
+    {34, 2, HSV_RED}, {36, 2, HSV_BLUE},
+    {38, 2, HSV_RED}, {40, 2, HSV_BLUE}
 );
-
 
 // Now define the array of layers. Later layers take precedence
 const rgblight_segment_t* const PROGMEM daishan_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
@@ -101,15 +125,17 @@ layer_state_t prev_state = 0;
 layer_state_t layer_state_set_user(layer_state_t state) {
     // blink in respective color if turning OSX layer on or off and remember state in eeprom
     if (!layer_state_cmp(prev_state, OSX) && layer_state_cmp(state, OSX)) {
-        #ifdef RGBLIGHT_LAYERS
-        rgblight_blink_layer(UGL_OSX, 1000);
-        #endif
+        set_unicode_input_mode(UNICODE_MODE_MACOS);
+//        #ifdef RGBLIGHT_LAYERS
+//        rgblight_blink_layer(UGL_OSX, 1000);
+//        #endif
         user_config.osx_layer_enabled = 1;
         eeconfig_update_user(user_config.raw);
-    } else if (layer_state_cmp(prev_state, OSX) && !layer_state_cmp(state, OSX)){
-        #ifdef RGBLIGHT_LAYERS
-        rgblight_blink_layer(UGL_NONE, 1000);
-        #endif
+    } else if (layer_state_cmp(prev_state, OSX) && !layer_state_cmp(state, OSX)) {
+        set_unicode_input_mode(UNICODE_MODE_LINUX);
+//        #ifdef RGBLIGHT_LAYERS
+//        rgblight_blink_layer(UGL_NONE, 1000);
+//        #endif
         user_config.osx_layer_enabled = 0;
         eeconfig_update_user(user_config.raw);
     }
